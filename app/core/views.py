@@ -1,4 +1,7 @@
 from rest_framework.views import APIView
+from rest_framework.generics import ListAPIView
+from rest_framework.pagination import PageNumberPagination
+from .models import TextScore
 from rest_framework.response import Response
 from .serializers import TextScoreSerializer
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
@@ -42,3 +45,7 @@ class TextScoringAPI(APIView):
         )
 
         return Response(TextScoreSerializer(text_score).data)
+
+class TextScoreHistoryAPI(ListAPIView):
+    queryset = TextScore.objects.all().order_by('-created_at')
+    serializer_class = TextScoreSerializer

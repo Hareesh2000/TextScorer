@@ -16,7 +16,7 @@ COPY ./requirements.txt /tmp/requirements.txt
 RUN /py/bin/pip install -r /tmp/requirements.txt
 
 # Copy the application code
-COPY ./app /app
+COPY . /app
 WORKDIR /app
 
 # Expose the port the app runs on
